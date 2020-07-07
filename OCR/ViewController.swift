@@ -80,14 +80,14 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
 //                print(ocrText)
 //                self.ocrTextView.text = ocrText
-                self.nik.text = self.data[4]
-                self.nama.text = self.data[6]
-                self.jenisKelamin.text = self.data[10]
-                self.alamat.text = self.data[14]
-                self.agama.text = self.data[1]
-                self.status.text = self.data[21]
-                self.kewarganegaraan.text = self.data[23]
-                self.berlaku.text = self.data[26]
+                self.nik.text = self.data[3]
+                self.nama.text = self.data[5]
+                self.jenisKelamin.text = self.data[9]
+                self.alamat.text = self.data[12]
+                self.agama.text = self.data[20]
+                self.status.text = self.data[22]
+                self.kewarganegaraan.text = self.data[26]
+                self.berlaku.text = self.data[30]
 //                print(self.data)
                 for y in self.data {
                     print(y)
