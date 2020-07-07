@@ -60,9 +60,17 @@ class ViewController: UIViewController {
 //            var ocrText = ""
             for observation in observations {
                 guard let topCandidate = observation.topCandidates(1).first else { return }
-                
+
+                let sayHello = topCandidate.string
+                let result = sayHello.components(separatedBy: ":")
+//                print(result)
+                for x in result {
+                    if x != "" {
+                        self.data.append(x)
+                    }
+                }
 //                ocrText += topCandidate.string + "\n"
-                self.data.append(topCandidate.string.replacingOccurrences(of: ":", with: ""))
+//                self.data.append(topCandidate.string.replacingOccurrences(of: ":", with: ""))
                 
                 //TODO coba split jika mengandung :
                 //https://stackoverflow.com/questions/25678373/split-a-string-into-an-array-in-swift
@@ -72,15 +80,18 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
 //                print(ocrText)
 //                self.ocrTextView.text = ocrText
-                self.nik.text = self.data[3]
-                self.nama.text = self.data[5]
-                self.jenisKelamin.text = self.data[8]
-                self.alamat.text = self.data[11]
-                self.agama.text = self.data[19]
+                self.nik.text = self.data[4]
+                self.nama.text = self.data[6]
+                self.jenisKelamin.text = self.data[10]
+                self.alamat.text = self.data[14]
+                self.agama.text = self.data[1]
                 self.status.text = self.data[21]
                 self.kewarganegaraan.text = self.data[23]
-                self.berlaku.text = self.data[25]
-                print(self.data)
+                self.berlaku.text = self.data[26]
+//                print(self.data)
+                for y in self.data {
+                    print(y)
+                }
                 self.scanButton.isEnabled = true
             }
         }
