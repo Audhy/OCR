@@ -112,7 +112,7 @@ extension ViewController: VNDocumentCameraViewControllerDelegate {
             return
         }
         
-        let image = scan.imageOfPage(at: 0)
+        let image = scan.imageOfPage(at: scan.pageCount-1)
 //        let noirImage = image.noir // noirImage is an optional UIImage (UIImage?)
         
         guard let noirImage = image.noir else{
