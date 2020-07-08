@@ -73,29 +73,41 @@ class ViewController: UIViewController {
             }
             
             DispatchQueue.main.async {
-                if self.data.count > 3 {
-                    self.nik.text = self.data[3]
+                let nikIndex = self.data.indices.filter {self.data[$0] == "NIK"}
+                if nikIndex.count > 0 && nikIndex.count > 0 {
+                    self.nik.text = self.data[nikIndex[0]+1]
                 }
-                if self.data.count > 5 {
-                    self.nama.text = self.data[5]
+//                let namaIndex = self.data.indices.filter {self.data[$0] == "Nama"}
+//                if self.data.count > 3 {
+//                    self.nik.text = self.data[3]
+//                }
+                let namaIndex = self.data.indices.filter {self.data[$0] == "Nama"}
+                if namaIndex.count > 0 && self.data.count > namaIndex[0]+1 {
+                    self.nama.text = self.data[namaIndex[0]+1]
                 }
-                if self.data.count > 9 {
-                    self.jenisKelamin.text = self.data[9]
+                let jkIndex = self.data.indices.filter {self.data[$0] == "Jenis Kelamin"}
+                if jkIndex.count > 0 && self.data.count > jkIndex[0]+1 {
+                    self.jenisKelamin.text = self.data[jkIndex[0]+1]
                 }
-                if self.data.count > 13 {
-                    self.alamat.text = self.data[13]
+                let alamatIndex = self.data.indices.filter {self.data[$0] == "Alamat"}
+                if alamatIndex.count > 0 && self.data.count > alamatIndex[0]+1 {
+                    self.alamat.text = self.data[alamatIndex[0]+1]
                 }
-                if self.data.count > 21 {
-                    self.agama.text = self.data[21]
+                let agamaIndex = self.data.indices.filter {self.data[$0] == "Agama"}
+                if agamaIndex.count > 0 && self.data.count > agamaIndex[0]+1 {
+                    self.agama.text = self.data[agamaIndex[0]+1]
                 }
-                if self.data.count > 23 {
-                    self.status.text = self.data[23]
+                let statusIndex = self.data.indices.filter {self.data[$0] == "Status Perkawinan"}
+                if statusIndex.count > 0 && self.data.count > statusIndex[0]+1 {
+                    self.status.text = self.data[statusIndex[0]+1]
                 }
-                if self.data.count > 27 {
-                    self.kewarganegaraan.text = self.data[27]
+                let kewarganegaraanIndex = self.data.indices.filter {self.data[$0] == "Kewarganegaraan"}
+                if kewarganegaraanIndex.count > 0 && self.data.count > kewarganegaraanIndex[0]+1 {
+                    self.kewarganegaraan.text = self.data[kewarganegaraanIndex[0]+1]
                 }
-                if self.data.count > 30 {
-                    self.berlaku.text = self.data[30]
+                let berlakuIndex = self.data.indices.filter {self.data[$0] == "Berlaku Hingga"}
+                if berlakuIndex.count > 0 && self.data.count > berlakuIndex[0]+1 {
+                    self.berlaku.text = self.data[berlakuIndex[0]+1]
                 }
 
                 for y in self.data {
