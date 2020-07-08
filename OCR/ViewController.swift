@@ -42,7 +42,6 @@ class ViewController: UIViewController {
     private func processImage(_ image: UIImage) {
         guard let cgImage = image.cgImage else { return }
         
-        //        ocrTextView.text = ""
         scanButton.isEnabled = false
         
         let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
@@ -57,23 +56,16 @@ class ViewController: UIViewController {
         ocrRequest = VNRecognizeTextRequest { (request, error) in
             guard let observations = request.results as? [VNRecognizedTextObservation] else { return }
             
-            //            var ocrText = ""
             for observation in observations {
                 guard let topCandidate = observation.topCandidates(1).first else { return }
                 
                 let sayHello = topCandidate.string
                 let result = sayHello.components(separatedBy: ":")
-                //                print(result)
                 for x in result {
                     if x != "" {
                         self.data.append(x)
                     }
                 }
-                //                ocrText += topCandidate.string + "\n"
-                //                self.data.append(topCandidate.string.replacingOccurrences(of: ":", with: ""))
-                
-                //TODO coba split jika mengandung :
-                //https://stackoverflow.com/questions/25678373/split-a-string-into-an-array-in-swift
             }
             
             if self.data[11] == "Alamat"{
@@ -81,8 +73,6 @@ class ViewController: UIViewController {
             }
             
             DispatchQueue.main.async {
-                //                print(ocrText)
-                //                self.ocrTextView.text = ocrText
                 self.nik.text = self.data[3]
                 self.nama.text = self.data[5]
                 self.jenisKelamin.text = self.data[9]
@@ -91,7 +81,6 @@ class ViewController: UIViewController {
                 self.status.text = self.data[23]
                 self.kewarganegaraan.text = self.data[27]
                 self.berlaku.text = self.data[30]
-                //                print(self.data)
                 for y in self.data {
                     print(y)
                 }
@@ -99,7 +88,7 @@ class ViewController: UIViewController {
             }
         }
         
-        ocrRequest.recognitionLevel = .accurate
+        ocrRequest.recognitionLevel = .accurate 
         ocrRequest.recognitionLanguages = ["en-US", "en-GB"]
         ocrRequest.usesLanguageCorrection = true
     }
@@ -116,7 +105,6 @@ extension ViewController: VNDocumentCameraViewControllerDelegate {
         }
         
         let image = scan.imageOfPage(at: scan.pageCount-1)
-        //        let noirImage = image.noir // noirImage is an optional UIImage (UIImage?)
         
         guard let noirImage = image.noir else{
             return
