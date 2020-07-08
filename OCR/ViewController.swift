@@ -73,14 +73,31 @@ class ViewController: UIViewController {
             }
             
             DispatchQueue.main.async {
-                self.nik.text = self.data[3]
-                self.nama.text = self.data[5]
-                self.jenisKelamin.text = self.data[9]
-                self.alamat.text = self.data[13]
-                self.agama.text = self.data[21]
-                self.status.text = self.data[23]
-                self.kewarganegaraan.text = self.data[27]
-                self.berlaku.text = self.data[30]
+                if self.data.count > 3 {
+                    self.nik.text = self.data[3]
+                }
+                if self.data.count > 5 {
+                    self.nama.text = self.data[5]
+                }
+                if self.data.count > 9 {
+                    self.jenisKelamin.text = self.data[9]
+                }
+                if self.data.count > 13 {
+                    self.alamat.text = self.data[13]
+                }
+                if self.data.count > 21 {
+                    self.agama.text = self.data[21]
+                }
+                if self.data.count > 23 {
+                    self.status.text = self.data[23]
+                }
+                if self.data.count > 27 {
+                    self.kewarganegaraan.text = self.data[27]
+                }
+                if self.data.count > 30 {
+                    self.berlaku.text = self.data[30]
+                }
+
                 for y in self.data {
                     print(y)
                 }
