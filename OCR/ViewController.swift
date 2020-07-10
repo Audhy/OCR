@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var scanButton: UIButton!
     private var ocrRequest = VNRecognizeTextRequest(completionHandler: nil)
     var data = [String]()
+    var similarity = [Similarity]()
+    let threshold = 0.8
     @IBOutlet weak var nik: UITextField!
     @IBOutlet weak var nama: UITextField!
     @IBOutlet weak var jenisKelamin: UITextField!
@@ -24,6 +26,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var status: UITextField!
     @IBOutlet weak var kewarganegaraan: UITextField!
     @IBOutlet weak var berlaku: UITextField!
+    
+    struct Similarity {
+        var name: String
+        var value: Double
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,40 +83,102 @@ class ViewController: UIViewController {
                 let nikIndex = self.data.indices.filter {self.data[$0] == "NIK"}
                 if nikIndex.count > 0 && nikIndex.count > 0 {
                     self.nik.text = self.data[nikIndex[0]+1]
+                } else {
+                    for x in self.data {
+                        let jr = "NIK".distance(between: x)
+                        if jr > 0.7 {
+                            self.similarity.append(Similarity(name: x, value: jr))
+                        }
+                    }
+                    if self.similarity.count > 0 {
+                        let max = self.similarity.sorted(by: {$1.value < $0.value})
+                        let result = self.similarity.filter { $0.value == max[0].value }.first
+                        let similarWord = self.data.indices.filter {self.data[$0] == result?.name}
+                        if self.similarity.count > 0 {
+                            self.nik.text = self.data[similarWord[0]+1]
+                        }
+                    }
                 }
-//                let namaIndex = self.data.indices.filter {self.data[$0] == "Nama"}
-//                if self.data.count > 3 {
-//                    self.nik.text = self.data[3]
-//                }
+                
                 let namaIndex = self.data.indices.filter {self.data[$0] == "Nama"}
                 if namaIndex.count > 0 && self.data.count > namaIndex[0]+1 {
                     self.nama.text = self.data[namaIndex[0]+1]
+                } else {
+                    for x in self.data {
+                        let jr = "Nama".distance(between: x)
+                        if jr > 0.7 {
+                            self.similarity.append(Similarity(name: x, value: jr))
+                        }
+                    }
+                    if self.similarity.count > 0 {
+                        let max = self.similarity.sorted(by: {$1.value < $0.value})
+                        let result = self.similarity.filter { $0.value == max[0].value }.first
+                        let similarWord = self.data.indices.filter {self.data[$0] == result?.name}
+                        if self.similarity.count > 0 {
+                            self.nama.text = self.data[similarWord[0]+1]
+                        }
+                    }
+                    
                 }
                 let jkIndex = self.data.indices.filter {self.data[$0] == "Jenis Kelamin"}
                 if jkIndex.count > 0 && self.data.count > jkIndex[0]+1 {
                     self.jenisKelamin.text = self.data[jkIndex[0]+1]
+                } else {
+                    for x in self.data {
+                        let jr = "Jenis Kelamin".distance(between: x)
+                        if jr > 0.7 {
+                            self.similarity.append(Similarity(name: x, value: jr))
+                        }
+                    }
+                    if self.similarity.count > 0 {
+                        let max = self.similarity.sorted(by: {$1.value < $0.value})
+                        let result = self.similarity.filter { $0.value == max[0].value }.first
+                        let similarWord = self.data.indices.filter {self.data[$0] == result?.name}
+                        if self.similarity.count > 0 {
+                            self.jenisKelamin.text = self.data[similarWord[0]+1]
+                        }
+                    }
                 }
-                let alamatIndex = self.data.indices.filter {self.data[$0] == "Alamat"}
+                let alamatIndex = self.data.indices.filter {self.data[$0] == "A1amat"}
                 if alamatIndex.count > 0 && self.data.count > alamatIndex[0]+1 {
                     self.alamat.text = self.data[alamatIndex[0]+1]
+                }else{
+                    let metchingWord = self.matching(title: "A1amat")
+                    self.alamat.text = metchingWord
                 }
-                let agamaIndex = self.data.indices.filter {self.data[$0] == "Agama"}
+                let agamaIndex = self.data.indices.filter {self.data[$0] == "Ag4ma"}
                 if agamaIndex.count > 0 && self.data.count > agamaIndex[0]+1 {
                     self.agama.text = self.data[agamaIndex[0]+1]
+                }else{
+                    let metchingWord = self.matching(title: "Ag4ma")
+                    self.agama.text = metchingWord
+                    
                 }
-                let statusIndex = self.data.indices.filter {self.data[$0] == "Status Perkawinan"}
+                let statusIndex = self.data.indices.filter {self.data[$0] == "Status P4rkawinan"}
                 if statusIndex.count > 0 && self.data.count > statusIndex[0]+1 {
                     self.status.text = self.data[statusIndex[0]+1]
+                }else{
+                    let metchingWord = self.matching(title: "Status P4rkawinan")
+                    self.status.text = metchingWord
+                    
                 }
-                let kewarganegaraanIndex = self.data.indices.filter {self.data[$0] == "Kewarganegaraan"}
+                let kewarganegaraanIndex = self.data.indices.filter {self.data[$0] == "K4warganegaraan"}
                 if kewarganegaraanIndex.count > 0 && self.data.count > kewarganegaraanIndex[0]+1 {
                     self.kewarganegaraan.text = self.data[kewarganegaraanIndex[0]+1]
+                }else{
+                    let metchingWord = self.matching(title: "K4warganegaraan")
+                    self.kewarganegaraan.text = metchingWord
+                    
                 }
-                let berlakuIndex = self.data.indices.filter {self.data[$0] == "Berlaku Hingga"}
+                let berlakuIndex = self.data.indices.filter {self.data[$0] == "B4rlaku Hingga"}
                 if berlakuIndex.count > 0 && self.data.count > berlakuIndex[0]+1 {
                     self.berlaku.text = self.data[berlakuIndex[0]+1]
+                }else{
+                    let metchingWord = self.matching(title: "B4rlaku Hingga")
+                    self.berlaku.text = metchingWord
+                    
                 }
-
+                
                 for y in self.data {
                     print(y)
                 }
@@ -120,6 +189,27 @@ class ViewController: UIViewController {
         ocrRequest.recognitionLevel = .accurate 
         ocrRequest.recognitionLanguages = ["en-US", "en-GB"]
         ocrRequest.usesLanguageCorrection = true
+    }
+    
+    func matching(title: String) -> String{
+        for x in self.data {
+            let jr = title.distance(between: x)
+            if jr > 0.7 {
+                self.similarity.append(Similarity(name: x, value: jr))
+            }
+        }
+        if self.similarity.count > 0 {
+            let max = self.similarity.sorted(by: {$1.value < $0.value})
+            let result = self.similarity.filter { $0.value == max[0].value }.first
+            let similarWord = self.data.indices.filter {self.data[$0] == result?.name}
+            if self.similarity.count > 0 {
+                let result = self.data[similarWord[0]+1]
+                self.similarity.removeAll()
+                return(result)
+            }
+        }
+        self.similarity.removeAll()
+        return ""
     }
     
     
