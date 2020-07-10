@@ -80,67 +80,66 @@ class ViewController: UIViewController {
             }
             
             DispatchQueue.main.async {
-                let nikIndex = self.data.indices.filter {self.data[$0] == "N1K"}
+                let nikIndex = self.data.indices.filter {self.data[$0] == "NIK"}
                 if nikIndex.count > 0 && nikIndex.count > 0 {
                     self.nik.text = self.data[nikIndex[0]+1]
                 }else{
-                    let metchingWord = self.matching(title: "N1K")
+                    let metchingWord = self.matching(title: "NIK")
                     self.nik.text = metchingWord
                 }
-                let namaIndex = self.data.indices.filter {self.data[$0] == "N4ma"}
+                let namaIndex = self.data.indices.filter {self.data[$0] == "Nama"}
                 if namaIndex.count > 0 && self.data.count > namaIndex[0]+1 {
                     self.nama.text = self.data[namaIndex[0]+1]
                 }else{
-                    let metchingWord = self.matching(title: "N4ma")
+                    let metchingWord = self.matching(title: "Nama")
                     self.nama.text = metchingWord
                 }
-                let jkIndex = self.data.indices.filter {self.data[$0] == "Jenis K4lamin"}
+                let jkIndex = self.data.indices.filter {self.data[$0] == "Jenis Kelamin"}
                 if jkIndex.count > 0 && self.data.count > jkIndex[0]+1 {
                     self.jenisKelamin.text = self.data[jkIndex[0]+1]
                 }else{
-                    let metchingWord = self.matching(title: "Jenis K4lamin")
+                    let metchingWord = self.matching(title: "Jenis Kelamin")
                     self.jenisKelamin.text = metchingWord
                     
                 }
-                let alamatIndex = self.data.indices.filter {self.data[$0] == "A1amat"}
+                let alamatIndex = self.data.indices.filter {self.data[$0] == "Alamat"}
                 if alamatIndex.count > 0 && self.data.count > alamatIndex[0]+1 {
                     self.alamat.text = self.data[alamatIndex[0]+1]
                 }else{
-                    let metchingWord = self.matching(title: "A1amat")
+                    let metchingWord = self.matching(title: "Alamat")
                     self.alamat.text = metchingWord
                 }
-                let agamaIndex = self.data.indices.filter {self.data[$0] == "Ag4ma"}
+                let agamaIndex = self.data.indices.filter {self.data[$0] == "Agama"}
                 if agamaIndex.count > 0 && self.data.count > agamaIndex[0]+1 {
                     self.agama.text = self.data[agamaIndex[0]+1]
                 }else{
-                    let metchingWord = self.matching(title: "Ag4ma")
+                    let metchingWord = self.matching(title: "Agama")
                     self.agama.text = metchingWord
                 }
-                let statusIndex = self.data.indices.filter {self.data[$0] == "Status P4rkawinan"}
+                let statusIndex = self.data.indices.filter {self.data[$0] == "Status Perkawinan"}
                 if statusIndex.count > 0 && self.data.count > statusIndex[0]+1 {
                     self.status.text = self.data[statusIndex[0]+1]
                 }else{
-                    let metchingWord = self.matching(title: "Status P4rkawinan")
+                    let metchingWord = self.matching(title: "Status Perkawinan")
                     self.status.text = metchingWord
                 }
-                let kewarganegaraanIndex = self.data.indices.filter {self.data[$0] == "K4warganegaraan"}
+                let kewarganegaraanIndex = self.data.indices.filter {self.data[$0] == "Kewarganegaraan"}
                 if kewarganegaraanIndex.count > 0 && self.data.count > kewarganegaraanIndex[0]+1 {
                     self.kewarganegaraan.text = self.data[kewarganegaraanIndex[0]+1]
                 }else{
-                    let metchingWord = self.matching(title: "K4warganegaraan")
+                    let metchingWord = self.matching(title: "Kewarganegaraan")
                     self.kewarganegaraan.text = metchingWord
-                    
                 }
-                let berlakuIndex = self.data.indices.filter {self.data[$0] == "B4rlaku Hingga"}
+                let berlakuIndex = self.data.indices.filter {self.data[$0] == "Berlaku Hingga"}
                 if berlakuIndex.count > 0 && self.data.count > berlakuIndex[0]+1 {
                     self.berlaku.text = self.data[berlakuIndex[0]+1]
                 }else{
-                    let metchingWord = self.matching(title: "B4rlaku Hingga")
+                    let metchingWord = self.matching(title: "Berlaku Hingga")
                     self.berlaku.text = metchingWord
                 }
-                for y in self.data {
-                    print(y)
-                }
+//                for y in self.data {
+//                    print(y)
+//                }
                 self.scanButton.isEnabled = true
             }
         }
