@@ -80,64 +80,27 @@ class ViewController: UIViewController {
             }
             
             DispatchQueue.main.async {
-                let nikIndex = self.data.indices.filter {self.data[$0] == "NIK"}
+                let nikIndex = self.data.indices.filter {self.data[$0] == "N1K"}
                 if nikIndex.count > 0 && nikIndex.count > 0 {
                     self.nik.text = self.data[nikIndex[0]+1]
-                } else {
-                    for x in self.data {
-                        let jr = "NIK".distance(between: x)
-                        if jr > 0.7 {
-                            self.similarity.append(Similarity(name: x, value: jr))
-                        }
-                    }
-                    if self.similarity.count > 0 {
-                        let max = self.similarity.sorted(by: {$1.value < $0.value})
-                        let result = self.similarity.filter { $0.value == max[0].value }.first
-                        let similarWord = self.data.indices.filter {self.data[$0] == result?.name}
-                        if self.similarity.count > 0 {
-                            self.nik.text = self.data[similarWord[0]+1]
-                        }
-                    }
+                }else{
+                    let metchingWord = self.matching(title: "N1K")
+                    self.nik.text = metchingWord
                 }
-                
-                let namaIndex = self.data.indices.filter {self.data[$0] == "Nama"}
+                let namaIndex = self.data.indices.filter {self.data[$0] == "N4ma"}
                 if namaIndex.count > 0 && self.data.count > namaIndex[0]+1 {
                     self.nama.text = self.data[namaIndex[0]+1]
-                } else {
-                    for x in self.data {
-                        let jr = "Nama".distance(between: x)
-                        if jr > 0.7 {
-                            self.similarity.append(Similarity(name: x, value: jr))
-                        }
-                    }
-                    if self.similarity.count > 0 {
-                        let max = self.similarity.sorted(by: {$1.value < $0.value})
-                        let result = self.similarity.filter { $0.value == max[0].value }.first
-                        let similarWord = self.data.indices.filter {self.data[$0] == result?.name}
-                        if self.similarity.count > 0 {
-                            self.nama.text = self.data[similarWord[0]+1]
-                        }
-                    }
-                    
+                }else{
+                    let metchingWord = self.matching(title: "N4ma")
+                    self.nama.text = metchingWord
                 }
-                let jkIndex = self.data.indices.filter {self.data[$0] == "Jenis Kelamin"}
+                let jkIndex = self.data.indices.filter {self.data[$0] == "Jenis K4lamin"}
                 if jkIndex.count > 0 && self.data.count > jkIndex[0]+1 {
                     self.jenisKelamin.text = self.data[jkIndex[0]+1]
-                } else {
-                    for x in self.data {
-                        let jr = "Jenis Kelamin".distance(between: x)
-                        if jr > 0.7 {
-                            self.similarity.append(Similarity(name: x, value: jr))
-                        }
-                    }
-                    if self.similarity.count > 0 {
-                        let max = self.similarity.sorted(by: {$1.value < $0.value})
-                        let result = self.similarity.filter { $0.value == max[0].value }.first
-                        let similarWord = self.data.indices.filter {self.data[$0] == result?.name}
-                        if self.similarity.count > 0 {
-                            self.jenisKelamin.text = self.data[similarWord[0]+1]
-                        }
-                    }
+                }else{
+                    let metchingWord = self.matching(title: "Jenis K4lamin")
+                    self.jenisKelamin.text = metchingWord
+                    
                 }
                 let alamatIndex = self.data.indices.filter {self.data[$0] == "A1amat"}
                 if alamatIndex.count > 0 && self.data.count > alamatIndex[0]+1 {
@@ -152,7 +115,6 @@ class ViewController: UIViewController {
                 }else{
                     let metchingWord = self.matching(title: "Ag4ma")
                     self.agama.text = metchingWord
-                    
                 }
                 let statusIndex = self.data.indices.filter {self.data[$0] == "Status P4rkawinan"}
                 if statusIndex.count > 0 && self.data.count > statusIndex[0]+1 {
@@ -160,7 +122,6 @@ class ViewController: UIViewController {
                 }else{
                     let metchingWord = self.matching(title: "Status P4rkawinan")
                     self.status.text = metchingWord
-                    
                 }
                 let kewarganegaraanIndex = self.data.indices.filter {self.data[$0] == "K4warganegaraan"}
                 if kewarganegaraanIndex.count > 0 && self.data.count > kewarganegaraanIndex[0]+1 {
@@ -176,9 +137,7 @@ class ViewController: UIViewController {
                 }else{
                     let metchingWord = self.matching(title: "B4rlaku Hingga")
                     self.berlaku.text = metchingWord
-                    
                 }
-                
                 for y in self.data {
                     print(y)
                 }
