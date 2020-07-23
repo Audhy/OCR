@@ -48,6 +48,10 @@ class ViewController: UIViewController {
         appear = false
     }
     
+    @IBAction func retake(_ sender: UIButton) {
+        scanDocument()
+
+    }
     @objc private func scanDocument() {
         let scanVC = VNDocumentCameraViewController()
         scanVC.delegate = self
