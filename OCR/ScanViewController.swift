@@ -60,7 +60,7 @@ class ScanViewController: UIViewController {
     private func configureOCR() {
         ocrRequest = VNRecognizeTextRequest { (request, error) in
             guard let observations = request.results as? [VNRecognizedTextObservation] else { return }
-            
+            self.data.removeAll()
             for observation in observations {
                 guard let topCandidate = observation.topCandidates(1).first else { return }
                 
