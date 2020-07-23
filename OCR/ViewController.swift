@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var status: UITextField!
     @IBOutlet weak var kewarganegaraan: UITextField!
     @IBOutlet weak var berlaku: UITextField!
+    var appear =  true
     
     struct Similarity {
         var name: String
@@ -35,9 +36,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        scanButton.addTarget(self, action: #selector(scanDocument), for: .touchUpInside)
+//        scanButton.addTarget(self, action: #selector(scanDocument), for: .touchUpInside)
         configureOCR()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if appear {
+            scanDocument()
+        }
+        appear = false
     }
     
     @objc private func scanDocument() {
@@ -137,9 +145,6 @@ class ViewController: UIViewController {
                     let metchingWord = self.matching(title: "Berlaku Hingga")
                     self.berlaku.text = metchingWord
                 }
-//                for y in self.data {
-//                    print(y)
-//                }
                 self.scanButton.isEnabled = true
             }
         }
@@ -176,6 +181,7 @@ class ViewController: UIViewController {
 
 extension ViewController: VNDocumentCameraViewControllerDelegate {
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+        print("ss")
         guard scan.pageCount >= 1 else {
             controller.dismiss(animated: true)
             return
